@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<title>Raspberry Pi</title>
+<style type="text/css">
+</style>
+<body>
+<p>OCaml for <a href="http://www.cl.cam.ac.uk/~rdm34/raspi/">Raspberry Pi</a> (partly) works straight
+out of the box on Raspbian.</p>
+
+<p>Unfortunately there are (as yet) no pre-compiled ARMv6 binaries suitable to download
+so it's currently necessary to download the source tree and build it yourself.</p>
+
+<p>Just download the latest version (you need the "source tarball" ocaml-4.00.0.tar.gz ) from
+<a href="http://caml.inria.fr/ocaml/release.en.html">http://caml.inria.fr/ocaml/release.en.html</a>,
+<br> unzip it with <tt>tar zxf ocaml-4.00.0.tar.gz</tt> and
+<br> read the files in capital letters, such as <tt>INSTALL</tt>, for (the usual) instructions, which can be abbreviated to:
+<pre>
+$ ./configure
+$ make world
+$ sudo make install
+</pre>
+<p>This (assuming default options) provides "ocaml" (and others) executable binaries in /usr/local/bin
+which is on the default Raspbian search path.</p>
+
+<p>Also note that the ARM native code OCaml compiler ("make opt") does not yet work
+(we presume this is ARMv6 and ARMv7 instruction set differences).</p>
+
+<p>The OCaml <a href="http://caml.inria.fr/pub/docs/manual-ocaml-4.00/index.html">manuals</a> is available from the above download site too.
+
+<align><img src="http://www.cl.cam.ac.uk/~rdm34/raspi/logo.jpg" width=100 border=0></align>
+
+</body>

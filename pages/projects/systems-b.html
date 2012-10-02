@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<title>Systems Projects</title>
+<style type="text/css">
+</style>
+<body>
+<div class="ucampas-toc right"></div>
+<h1>Systems Projects</h1>
+<p>We are still defining a full set of projects for OCamlLabs, but
+here are some that we wish to start off immediately.  We are <a class="icon-community" href="collaboration.html">hiring</a>
+if you are interested in any of these! This list is also not intended to
+be exhaustive, and there is plenty of room for research and experimentation.
+</p>
+<p>If you are a Part-II or ACS student and want to work on one of these topics for your
+project, then there are several good ideas here. Get in touch with <a href="/~jac22">Jon Crowcroft</a>,
+<a href="/~iml1">Ian Leslie</a> or
+<a href="/~avsm2">Anil Madhavapeddy</a> to discuss concrete proposals.</p>
+
+<hr/>
+
+<p>We <i>use</i> OCaml heavily for our systems research, which usually involves
+building complex distributed systems.  Here is a flavour of some of the things
+that we are working on.</p>
+
+<h2 id="Mirage: OCaml Library OS">Mirage: A Library Operating System for the Cloud</h2>
+
+<p>
+The cloud has so far mostly been used to consolidate existing operating
+systems and manage them more conveniently.  The interface between guest
+kernels, applications and VMs are all managed very differently, leading to
+serious inefficiencies, unreliability and insecurity.</p>
+
+<p>Our <a href="http://www.openmirage.org/">Mirage</a> OS revisits the
+<a href="http://en.wikipedia.org/wiki/Nemesis_(operating_system)">library OS</a>
+concept (built as <a href="http://www.cl.cam.ac.uk/research/srg/netos/old-projects/nemesis/">Nemesis</a>
+in the Lab in the late '90s), and finds it a practical approach to improve this situation.
+Applications are written in a high-level functional programming language
+(OCaml) and compiled directly into microkernels that run on the Xen hypervisor.
+By treating the hypervisor as a stable hardware platform, we can focus on
+high-performance protocol implementations without worrying about having to
+support the thousands of device drivers found in a traditional OS.</p>
+
+<p>Mirage includes clean-slate functional implementations of protocols
+ranging from <a href="http://github.com/mirage/mirage-net">TCP/IP</a>,
+<a href="http://github.com/mirage/ocaml-dns">DNS</a>,
+<a href="http://github.com/mirage/ocaml-ssh">SSH</a>,
+<a href="http://www.openmirage.org/blog/announcing-mirage-openflow">Openflow</a> (switch/controller),
+<a href="http://github.com/mirage/ocaml-cohttp">HTTP</a>, XMPP
+and Xen inter-VM transports.
+Some of the new applications we are building using Mirage
+include the next-generation <a href="http://www.xen.org/products/cloudxen.html">Xen Cloud Platform</a> (a widely deployed
+open-source Xen distribution), dubbed <a href="http://xen.org/xensummit/xs12na_talks/T2.html">Project Windsor</a>.</p>
+
+<p><a class="icon-video" href="http://www.youtube.com/watch?v=dJlHBS7sP_c&feature=plcp">Programming the Xen cloud using OCaml</a>, <i>David Scott, Anil Madhavapeddy and Richard Mortier</i> in the 1st ACM/SIGPLAN OCaml Users and Developers Workshop (<a href="http://oud.ocaml.org/2012">OUD '12</a>).</p>
+<p><a class="icon-pdf" href="http://anil.recoil.org/papers/2010-icfp-xen.pdf">Using Functional Programming within an Industrial Product Group: Perspectives and Perceptions</a>, <i>David Scott, Richard Sharp, Thomas Gazagnaire and Anil Madhavapeddy</i>, in the 15th ACM SIGPLAN International Conference on Functional Programming (ICFP '10).</p>
+<p><a class="icon-pdf" href="http://anil.recoil.org/papers/2010-hotcloud-lamp.pdf">Turning down the LAMP: Software Specialisation for the Cloud</a>, <i>Anil Madhavapeddy, Richard Mortier, Ripduman Sohan, Thomas Gazagnaire, Steven Hand, Tim Deegan, Derek McAuley and Jon Crowcroft</i>, in the 2nd USENIX Workshop on Hot Topics in Cloud Computing (HotCloud '10).</p>
+<p><a class="icon-video" href="http://vimeo.com/16189862">Mirage: A New Multi-Scale Operating System for Clouds and Crowds</a>, <i>Anil Madhavapeddy</i>, <a href="">LinkedIn Tech Talk</a>, 2010.</p>
+
+<h2 id="Software-defined Networking">Software-defined Networking</h2>
+
+<p>Software Defined Networking (SDN) standards such as <a href="http://openflow.org">OpenFlow</a> permit
+distributed system interconnects to be virtualised, without a loss in
+performance. We have developed an <a href="http://github.com/mirage/ocaml-openflow">OCaml Openflow</a>
+protocol stack for the large-scale programming of datacenters to be high-performance 
+<i>and</i> safe and flexible.
+This protocol stack can also compile into a standalone operating system that
+runs on a virtual environment, or directly on hardware as a kernel module.
+</p>
+
+<p>SDN, and particularly our library-based OpenFlow, permits an application
+to configure the local network as just another hardware resource (like CPU
+time or local storage), and thus avoid many of the problems plaguing datacenter
+scaling today (e.g. TCP <a href="http://anil.recoil.org/papers/2010-icfp-xen.pdf">incast</a>).
+When combined with virtualisation, it lets applications "self-scale" to dynamically
+grow their own resource needs, for example starting from a single VM, and adding and reconfiguring nodes to
+load-balance traffic across datacenters during <a href="http://www.cl.cam.ac.uk/~nrs32/pubs/buzztraq.pdf">flash traffic</a>.
+</p>
+
+<p><a class="icon-pdf" href="http://anil.recoil.org/papers/2012-iccsdn-mirageflow.pdf">Cost, performance & flexibility in OpenFlow: Pick three</a>, 
+<i>Charalampos Rotsos, Richard Mortier, Anil Madhavapeddy, Balraj Singh and Andrew W. Moore</i>, in the
+<a href="http://sdn12.mytestbed.net/">IEEE Workshop on Software Defined Networks</a>, June 2012.</p>
+
+<h2 id="Signposts: end-to-end networking">Signposts: end-to-end networking</h2>
+
+<p>Signposts are a system to provide users with a secure, simple mechanism to
+establish and maintain communication channels between their personal cloud of
+named devices.  Signpost names exist in the DNSSEC hierarchy, and automatically
+resolve to secure end-points when accessed by existing DNS clients. Signpost
+clients intercept user connection attempts, while adding privacy and multipath
+support.  Signpost servers co-ordinate clients to dynamically discover routes
+and overcome the middleboxes that pervade modern edge networks.</p>
+
+<p>A simple scenario is where an individual’s personal devices (phone, laptop) are inter-connected via Signpost names, while sitting on different networks behind various middleboxes. Normally, they would not be able to see each other directly, but with Signposts, they will be able to fetch and push data between each other, demonstrated by, e.g., simple web browsing, even as the network configuration changes.</p>
+
+<p>The Signpost infrastructure is almost entirely <a href="http://github.com/avsm/signpostd">implemented</a> in OCaml, using
+the <a href="http://github.com/mirage/ocaml-dns">DNS</a>, <a href="http://github.com/mirage/ocaml-openflow">OpenFlow</a> and
+<a href="http://github.com/mirage/mirage-net">TCP/IP</a> libraries to perform the low-level networking manipulation required.
+</p>
+
+<p><a class="icon-pdf" href="http://anil.recoil.org/papers/2012-sigcomm-signposts-demo.pdf">Signposts: End-to-end networking in World of Middleboxes</a>,
+<i>Andrius Aucinas, Amir Chaudhry, Jon Crowcroft, Sebastian Probst Eide, Steve Hand, Anil Madhavapeddy, Andrew W. Moore, Charalampos Rotsos, Narseo Vallina-Rodriguez</i>, in <a href="http://conferences.sigcomm.org/sigcomm/2012/">SIGCOMM 2012</a> (demo track), August 2012. There is also a <a class="icon-print" href="http://anil.recoil.org/papers/2012-sigcomm-signposts-poster.pdf">poster</a> available.</p>
+
+<h2 id="Highly Capable OCaml">Highly Capable OCaml</h2>
+
+<p><a href="http://www.cl.cam.ac.uk/research/security/ctsrd/cheri.html">CHERI</a> is a hardware-software interface research project seeking to revise ISA design in order to better support software compartmentalisation. CHERI transposes the <a href="http://www.cl.cam.ac.uk/research/security/capsicum/">Capsicum</a> hybrid capability model into the CPU architecture space, allowing fine-grained compartmentalisation within process address spaces.
+The CHERI instruction set has been implemented as an FPGA-based MIPS64 soft-core CPU, and we will port the OCaml native code compiler to target this new backend.</p>
+
+<p>This project increases the security of OCaml code output at several levels:</p>
+<ul>
+<li>The <b>runtime</b> (written in C) can be compartmentalised in a fine-grained way, protecting against low-level bugs.  For example, the garbage collector could be modified to only have access to the header tags, and no read access to the actual <i>application data</i>.  A garbage collector error could thus prevent application progress, but not compromise sensitive application data.</li>
+<li>The <b>foreign-function interface</b> could be prevented from modifying the OCaml heap, despite running in the same address space.</li>
+<li><a href="http://www.normalesup.org/~simonet/soft/flowcaml/">FlowCaml</a> added information-flow capabilities to OCaml, to allow them to automatically check that they obey some confidentiality or integrity policy.  This could be extended to use CHERI instructions for further dynamic enforcement and taint tracking of data values.</li>
+</ul>
+
+<p><a class="icon-pdf" href="http://www.cl.cam.ac.uk/research/security/ctsrd/pdfs/2012resolve-cheri.pdf">CHERI: a research platform deconflating hardware virtualization and protection</a>, <i>Robert N.M. Watson, Peter G. Neumann Jonathan Woodruff, Jonathan Anderson, Ross Anderson, Nirav Dave, Ben Laurie, Simon W. Moore, Steven J. Murdoch, Philip Paeps, Michael Roe, and Hassen Saidi</i>, in Runtime Environments, Systems, Layering and Virtualized Environments (<a href="http://www.dcs.gla.ac.uk/conferences/resolve12/">RESoLVE '12</a>).</p>
+
+<h2 id="Raspberry Caml">Raspberry Caml</h2>
+
+<p>OCaml has full support for embedded native code, including for the <a href="http://www.raspberrypi.org">Raspberry Pi</a> and even <a href="http://psellos.com/ocaml/compile-to-iphone.html">iOS</a> devices.  However, these embedded stacks require fine control over resources in order to be <a class="icon-pdf" href="http://dx.doi.org/10.1016/j.pmcj.2010.07.005">energy-efficient</a>, and this is difficult to achieve when using an embedded Linux-based kernel and userspace.</p>
+
+<p>This project explores extending the <a href="http://www.openmirage.org">Mirage</a> libraries to run directly as a bare-metal operating system on the Raspberry Pi. It can be started from the <a href="http://kernelnomicon.org/?p=122">u-Boot</a> bootloader, and then output directly to a serial console.  You will need to construct device drivers (probably USB) written in OCaml in order to send networking traffic, and then evaluate the energy efficiency of this stack <i>vs</i> a conventional Linux- or FreeBSD-based approach.</p>
+
+<p>Once you a can compile OCaml programs directly into rPi kernels, perhaps it's time to explore <a href="http://conferences.sigcomm.org/sigcomm/2010/papers/mobiheld/p39.pdf" class="icon-pdf">crowd computing</a>!</p>
+
+<h2 id="Nigori: Storing Secrets in the Cloud">Nigori: Storing Secrets in the Cloud</h2>
+
+<p>Computer users today have a smartphone, a tablet, a laptop and a desktop
+machine. Consequently, many new computer applications seamlessly synchronise user data between devices using cloud storage as a highly-available intermediary. Whilst the communication link between the user device and cloud storage is often encrypted, user data is typically stored in a form which is readable by the cloud provider and the application developer.</p>
+
+<p>The aim of the <a href="http://code.google.com/p/nigori/" class="icon-media">Nigori project</a> is to develop a practical, application neutral, mechanism for storing sensitive user data in the cloud in such a way that the cloud provider and application developer cannot read any of the stored information. There is an initial specification, and an implementation of Nigori for Java and Android. The next effort is to build a JavaScript version suitable for use as a plug-in for Web browsers.  One interesting approach to building a Javascript version is to build it in OCaml using <a href="http://forge.ocamlcore.org/projects/cryptokit/">Cryptokit</a> and <a href="http://ocsigen.org/js_of_ocaml/"><tt>js_of_ocaml</tt></a>.  This lets the same functional source code be compiled into fast native code that runs on some mobile devices (e.g. <a href="http://psellos.com/ocaml/compile-to-iphone.html">iOS</a>), and also to slower but more portable Javascript.  The code could also have aspects of it formally verified for correctness, for example using the <a href="http://coq.inria.fr">Coq</a> theorem prover.</p>
+
+<p>Nigori consists of two components: a datastore and a client library. A Nigori datastore is a service, either run locally on the device alongside the application, or run remotely in the cloud. The client library forms part of the application and runs on a user's device, encrypts data, and manages the user's datastores. A typical application deployment will contain one datastore on each user device and one datastore in the cloud; the application can then use Nigori to keep datastores, and therefore user data, synchronised across all their devices.</p>
+
+<p>Contact <a class="icon-email" href="/~arb33">Alastair Beresford</a> and <a class="icon-email" href="/~avsm2">Anil Madhavapeddy</a> if you would like to know more about this project.</p>
+<p><a class="icon-external" href="http://code.google.com/p/nigori/">Google Code homepage</a>.</p>
+
+</body>

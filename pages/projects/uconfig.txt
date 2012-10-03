@@ -1,1 +1,1 @@
-platform.html, compiler.html, systems.html, teaching.html, raspberrypi.html
+index.html, platform.html, compiler.html, systems.html, teaching.html, raspberrypi.html

@@ -3,28 +3,28 @@
 <style type="text/css">
 </style>
 <body>
-<p>OCaml for <a href="http://www.cl.cam.ac.uk/~rdm34/raspi/">Raspberry Pi</a> (partly) works straight
-out of the box on Raspbian.</p>
+<p>The <a href="http://www.cl.cam.ac.uk/~rdm34/raspi/">Raspberry Pi</a> is an ARMv6 processor, and there are two main distributions available. Standard Debian wheezy is compiled with <i>soft float</i> (which emulates floating point) and is fairly compatible with most software.  The <a href="http://www.raspbian.org">Raspbian</a> Debian distribution is recompiled to take advantage of <i>hard float</i>, which is faster but requires a new set of binary packages.</p>
 
-<p>Unfortunately there are (as yet) no pre-compiled ARMv6 binaries suitable to download
-so it's currently necessary to download the source tree and build it yourself.</p>
+<h2>Soft-float Debian</h2>
 
-<p>Just download the latest version (you need the "source tarball" ocaml-4.00.0.tar.gz ) from
-<a href="http://caml.inria.fr/ocaml/release.en.html">http://caml.inria.fr/ocaml/release.en.html</a>,
-<br> unzip it with <tt>tar zxf ocaml-4.00.0.tar.gz</tt> and
-<br> read the files in capital letters, such as <tt>INSTALL</tt>, for (the usual) instructions, which can be abbreviated to:
-<pre>
-$ ./configure
-$ make world
-$ sudo make install
+<p>There is a nice guide available on the <a href="https://ocaml.janestreet.com/?q=node/110">Jane Street OCaml</a> blog on how to bootstrap OCaml on an rPi.</p>
+
+<h2>Hard-float Raspbian</h2>
+
+<p>Once you have Raspbian installed, the byte-code compiler (<tt>ocamlc</tt>) will work, but the native code (<tt>ocamlopt</tt>) doesnt work out of the box. This is due to differences in the ARMv6 and ARMv7 instruction sets. The Raspbian distribution uses a calling convention called <tt>VFPE2</tt> to handle floating point, and OCaml doesn't recognise it by default.</p>
+
+<p>Luckily, there is a patch available to add this support, from <a href="https://github.com/avsm/ocaml/commit/22bac7036b6cb4d1a90e827706fe8772ebfc981d.patch">here</a>, that adds support for OCaml-4.00.x.
+You can download precompiled debs with this patch by adding the following to <tt>/etc/apt/sources.list</tt>:</p>
+<pre>deb http://www.cl.cam.ac.uk/~lpw25/ocaml-rpi/ wheezy main
+deb-src http://www.cl.cam.ac.uk/~lpw25/ocaml-rpi/ wheezy main
 </pre>
-<p>This (assuming default options) provides "ocaml" (and others) executable binaries in /usr/local/bin
-which is on the default Raspbian search path.</p>
 
-<p>Also note that the ARM native code OCaml compiler ("make opt") does not yet work
-(we presume this is ARMv6 and ARMv7 instruction set differences).</p>
+<p>Alternatively, you can use OPAM to compile a custom compiler (see the Jane Street blog post above for instructions on how to install OPAM):</p>
+<pre>$ opam switch 4.00.1+raspberrypi
+$ eval `opam config -env`
+</pre>
 
-<p>The OCaml <a href="http://caml.inria.fr/pub/docs/manual-ocaml-4.00/index.html">manuals</a> is available from the above download site too.
+<p>This compiler should work on Raspbian with no issues. Many thanks to <a href="http://psellos.com/ocaml/compile-to-iphone.html">Jeffery Scofield</a> for all this help with this patch!</p>
 
 <align><img src="http://www.cl.cam.ac.uk/~rdm34/raspi/logo.jpg" width=100 border=0></align>
 

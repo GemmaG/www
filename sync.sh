@@ -4,5 +4,6 @@ TARG=/anfs/www/html/projects/ocamllabs
 git pull http://github.com/ocamllabs/www
 rsync -av pages/ ${TARG}/
 cd ${TARG}
-ucampas -r1 *-b.html projects local
+ucampas/ucampas -r1 *-b.html projects local
+chgroup -R ocamllabs ${TARG}/*
 chmod -R g+w ${TARG}/*

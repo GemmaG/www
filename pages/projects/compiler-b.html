@@ -47,8 +47,8 @@ planned include:</p>
 research issue.  We will begin by investigating techniques that do not involve
 fine-grained locking, as this has been shown to be error-prone, difficult to
 maintain, and impacts sequential performance.  Instead, we prefer to isolate
-threads to individual cores, with region-based heaps that can be garbage
-collected separately.  This technique has been successfully demonstrated in
+threads to individual cores, with separate heaps that can be garbage
+collected independently.  This technique has been successfully demonstrated in
 <a href="http://multimlton.cs.purdue.edu/mML/Welcome.html">MultiMLton</a>, system
 and runtime, and we will implement it in OCaml and its large body of
 third-party code.  </p>

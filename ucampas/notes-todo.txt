@@ -43,3 +43,13 @@ Potentially desirable features:
   http://www.admin.cam.ac.uk/cam-only/offices/hr/policy/severance/retirement/requirements/
   layout.css:ul#nav-tabbed
   http://upload.sms.csx.cam.ac.uk/
+- HTML5 parser
+- try not to abort at first syntax error (Neil Dodgson)
+- prevent inclusion of index.html in uconfig.txt
+- prevent inclusion of / in uconfig.txt
+- avoid dependency on modules not in "man perlmodlib" of Perl 5.8.1
+  (e.g., HTTP::Date)
+- skipitems and maxitems for ucampas-filelist
+- replace u.. with something more Windows-friendly (no trailing dots as
+  NTFS can't do these, no symlink as Windows can't do these and web robots
+  may find them)

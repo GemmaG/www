@@ -256,6 +256,8 @@ $template{undef} = $template{''} =
 #                       with a different navigation tree representation
 #  'markcurrent' => ... similar subroutine called for entry that leads
 #                       to $cur
+#  'markonpath' => ...  similar subroutine called for ancestor entry that
+#                       is on the path to $cur
 #  'marklink' => ...    similar subroutine called if entry is a *link
 #  'showinvisibles' => ...  if set, show in the navigation list even nodes
 #                           who have an 'invisible' attribute larger than 0
@@ -412,6 +414,10 @@ sub _navbar {
 	    # this item links to the current page
 	    # (or is as close as we can get if navstop=1)
 	    &{$p->{'markcurrent'}}($li, $div, $a) if $p->{'markcurrent'};
+	} elsif ($isonpathto && $c->nid ne $this->nid) {
+	    # this item links to a page that is on the navigation
+	    # path to the current one (excluding a navtopinclude node)
+	    &{$p->{'markonpath'}}($li, $div, $a) if $p->{'markonpath'};
 	}
 	if ($c->get("${domain}top") || !$c->param('navbar') || $islink ||
 	    $c->str =~ /\.(?:pdf|doc)\z/i) {
@@ -556,8 +562,8 @@ sub add_index($) {
     return $html;
 }
 
-sub apply_style($$$) {
-    my ($cur, $src, $style) = @_;
+sub apply_style($$$$) {
+    my ($cur, $src, $style, $notes) = @_;
 
     # process Perl instructions embedded in source
     foreach my $c ($src->lfind('+perl', 'all')) {
@@ -807,9 +813,18 @@ sub apply_style($$$) {
 			$extension{$fn} = $1;
 		    }
 		    if ($dates) {
-			if ($basename{$fn} =~ s/^((\d{4})(?:-\d{2}(?:-\d{2})?)?)[-_]?//) {
+			if ($basename{$fn} =~ s/^((\d{4})(?:-(\d{2})(?:-\d{2})?)?)[-_]?//) {
 			    $date{$fn} = $1;
 			    $year{$fn} = $2;
+			    my $month = $3;
+			    if ($clusteryears =~ /^a/) {
+				# academic year: 1 October to 30 September
+				if ($month >= 10) {
+				    $year{$fn} = sprintf("%4d/%02d", $year{$fn}, ($year{$fn}+1) % 100);
+				} else {
+				    $year{$fn} = sprintf("%4d/%02d", $year{$fn}-1, $year{$fn} % 100);
+				}
+			    }
 			}
 		    }
 		    if ($neatfilename) {
@@ -881,7 +896,6 @@ sub apply_style($$$) {
 			"~$basename{$fn}~$extension{$fn}~$fn";
 		}
 		@list = sort { $sortkey{$a} cmp $sortkey{$b} } @list;
-		@list = reverse @list if $pattern->get('reverse');
 		my %extension_preference = ( '.pdf' => 1, '.doc' => 2 );
 		my @li;
 		while (my $fn = shift @list) {
@@ -945,6 +959,7 @@ sub apply_style($$$) {
 		    @li = @nli;
 		}
 		if (@li) {
+		    @li = reverse @li if $pattern->get('reverse');
 		    if ($pattern->get('type') eq 'p') {
 			my $p = c('*p')->append(shift(@li)->list);
 			while (@li) {
@@ -962,15 +977,15 @@ sub apply_style($$$) {
 	    
 	    # RSS newsfeed
 	    # (intended and tested so far only for WordPress RSS 2.0 feeds)
+	    next unless defined $p;
+	    my $rssurl = $p->get('rssurl');
+	    die("no rssurl specified for newsfeed\n") unless defined $rssurl;
 	    eval {
-		next unless defined $p;
-		my $rssurl = $p->get('rssurl');
+		push @{$notes}, 'newsfeed';
 		my $nodescription = $p->get('nodescription');
 		my $noitemlink = $p->get('noitemlink');
 		my $type = $p->get('type') || 'div';
 		my $maxdays = $p->get('maxdays');
-		die("no rssurl specified\n") unless defined $rssurl;
-		print STDERR "\nIncorporating RSS feed ...\n" unless $quiet;
 		my $xml=`curl -f -s -S "$rssurl"`;
 		die("failed downloading '$rssurl'\n") unless $xml;
 		my $rss=text($xml)->cd('.sgmldec');
@@ -1121,7 +1136,7 @@ sub apply_style($$$) {
 		}
 	    };
 	    if ($@) {
-		printf STDERR PlexTree::print_error($@, 'RSS newsfeed');
+		die PlexTree::print_error($@, "newsfeed $rssurl");
 	    }
 	} elsif ($feature eq 'include-text') {
 	    $dropdiv = 1 unless defined $dropdiv;
@@ -1348,7 +1363,7 @@ sub process_file($$) {
 	}
 	# prepare formatted page
 	my $style = $cur->param('style');
-	my $out = apply_style($cur, $src, $style);
+	my $out = apply_style($cur, $src, $style, \@notes);
 	if ($debug{'out'}) {
 	    print $out->print . "\n";
 	}
@@ -1437,13 +1452,18 @@ sub process_file($$) {
 
     };
     if ($@) {
+	my $error = $@;
 	# handle error messages
-	print STDERR "\n" unless $quiet;
-	if ($@ =~ /!\n\z/) {
-	    # exceptions ending in exclamation mark are serious
-	    die $@;
+	if ($quiet) { 
+	    print STDERR $cur->apath . ': ';
+	} else {
+	    print STDERR "\n";
 	}
-	print STDERR $@;
+	if ($error =~ /!\n\z/) {
+	    # exceptions ending in exclamation mark are serious
+	    die $error;
+	}
+	print STDERR $error;
 	$errors++;
 	return;
     }

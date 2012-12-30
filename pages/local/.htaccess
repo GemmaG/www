@@ -1,5 +1,0 @@
-Order Allow,Deny
-Satisfy Any
-Allow from .cam.ac.uk
-Require valid-user
-

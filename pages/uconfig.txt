@@ -1,9 +1,0 @@
-style=ucam2008(blue),
-navtop=1,
-navbar=1,
-section='OCaml Labs',
-copyright_holder="Anil Madhavapeddy",
-copyright_year="2012",
-organization="Computer Laboratory",
-webmaster=(email="avsm2@cl.cam.ac.uk",name="Anil Madhavapeddy"),
-index.html, projects, people.html, collaboration.html, publications.html, local, contact.html

@@ -1,0 +1,3 @@
+[submodule "updates"]
+	path = updates
+	url = git@github.com:ocamllabs/ocl-updates

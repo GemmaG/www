@@ -68,7 +68,8 @@
          
          <h4 id="Recent Updates">Recent Updates</h4><ul class="compact"> <li><a class="icon-media"/><i>31 Jan 2013</i>: 
     Updated  <a href="http://ocaml.org">Design and Content of OCaml.org</a> <i><a href="infrastructure.html#output-web-design-content">(more)</a></i></li>  <li><a class="icon-media"/><i>25 Jan 2013</i>: 
-    Updated  <a href="http://ocaml.org">Design and Content of OCaml.org</a> <i><a href="infrastructure.html#output-web-design-content">(more)</a></i></li>  <li><a class="icon-follow"/><i>29 Dec 2012</i>: 
+    Updated  <a href="http://ocaml.org">Design and Content of OCaml.org</a> <i><a href="infrastructure.html#output-web-design-content">(more)</a></i></li>  <li><a class="icon-follow"/><i>14 Jan 2013</i>: 
+    Released <a href="https://github.com/avsm/ocaml-github/archive/ocaml-github-0.4.3.tar.gz">ocaml-github-0.4.3</a> of  <a href="http://github.com/avsm/ocaml-github">ocaml-github</a> <i><a href="infrastructure.html#output-code-avsm-ocaml-github">(more)</a></i></li>  <li><a class="icon-follow"/><i>29 Dec 2012</i>: 
     Released <a href="https://github.com/avsm/ocaml-github/archive/ocaml-github-0.4.2.tar.gz">ocaml-github-0.4.2</a> of  <a href="http://github.com/avsm/ocaml-github">ocaml-github</a> <i><a href="infrastructure.html#output-code-avsm-ocaml-github">(more)</a></i></li>  <li><a class="icon-follow"/><i>27 Dec 2012</i>: 
     Released <a href="https://github.com/avsm/ocaml-github/archive/ocaml-github-0.4.1.tar.gz">ocaml-github-0.4.1</a> of  <a href="http://github.com/avsm/ocaml-github">ocaml-github</a> <i><a href="infrastructure.html#output-code-avsm-ocaml-github">(more)</a></i></li>  <li><a class="icon-follow"/><i>25 Dec 2012</i>: 
     Released <a href="https://github.com/avsm/ocaml-github/archive/ocaml-github-0.4.0.tar.gz">ocaml-github-0.4.0</a> of  <a href="http://github.com/avsm/ocaml-github">ocaml-github</a> <i><a href="infrastructure.html#output-code-avsm-ocaml-github">(more)</a></i></li>  <li><a class="icon-media"/><i>18 Dec 2012</i>: 
@@ -134,7 +135,14 @@
        <p>Github APIv3 OCaml bindings</p>
 
         <ul> <li><a href="http://github.com/avsm/ocaml-github">Homepage</a></li> </ul> 
-       <div><p><em>29 Dec 2012</em>: Released version <a href="http://github.com/avsm/ocaml-github/archive/ocaml-github-0.4.2.tar.gz">ocaml-github-0.4.2</a> with these changes:</p>
+       <div><p><em>14 Jan 2013</em>: Released version <a href="http://github.com/avsm/ocaml-github/archive/ocaml-github-0.4.3.tar.gz">ocaml-github-0.4.3</a> with these changes:</p>
+<div class="changelog">
+<ul>
+<li>Add filters and sort order parameters for <code>Issues</code> and <code>Milestones</code> for a repository.</li>
+</ul>
+</div>
+
+<p><em>29 Dec 2012</em>: Released version <a href="http://github.com/avsm/ocaml-github/archive/ocaml-github-0.4.2.tar.gz">ocaml-github-0.4.2</a> with these changes:</p>
 <div class="changelog">
 <ul>
 <li>Add a <code>redirect_uri</code> option to <code>URI.authorize</code>, to permit the redirection URL to be parameterizable.</li>
@@ -159,7 +167,7 @@
 <div class="changelog">
 <ul>
 <li>Add a <code>git-jar</code> command which provides a convenient command-line interface to list, create and save tokens.</li>
-<li>Add a <code>github.unix</code> subpackage which provides a <code>Github_cookie_jar</code> module which saves tokens in <code>HOME/.github</code> for other applications to query if they use the Github API.</li>
+<li>Add a <code>github.unix</code> subpackage which provides a <code>Github_cookie_jar</code> module which saves tokens in <code>~/.github</code> for other applications to query if they use the Github API.</li>
 <li>Complete the auth API, and rename functions slightly for consistency. We now have <code>Token.get_all</code> and <code>Token.get</code> to retrieve auth information, and <code>Token.create</code> for constructing them. The API also includes support for adding notes and URLs, which are stored on the Github side.</li>
 </ul>
 </div>

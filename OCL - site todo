@@ -1,2 +1,93 @@
 * suffixes for files? .md .html etc
 * how are we going to serve images? Currently not supported by Canopy...
+
+* have created text files to accompany html files for tasks/activities
+* will leave other auto-gen content alone for now in ocl-reporter repo on my machine
+
+
+Content
+* Projects (autogen)
+ocl-reporter content:
+ - Compiler
+ - Illuminate
+ - Mirage
+ - Platform
+ - T2
+Future content:
+- Compiler
+ - Multicore and effects (in progress)
+ - DWARF (in progress)
+ - Metaprogramming (in progress?)
+ - Generic programming (in progress?)
+ - Ctypes (complete?)
+ - Cmeleon (complete?)
+ - Flambda (complete?)
+ - Modular implicits prototype (complete)
+ - Exception match (complete)
+ - Namespacing (complete)
+ - Higher kinded polymorphism (complete)
+ - OCaml JAVA (complete)
+ - Record disambiguation (complete)
+ - Open types (complete)
+ - Syntax extensions (complete)
+- OPAM
+  - 1.3 release?
+  - Libraries and packages
+- Mirage
+  - Canopy (in progress)
+  - River (in progress?)
+- Tooling
+  - Codoc (in progress) or is Leo working on odoc?
+  - AFL (in progress)
+  - Merlin (merlin-extend in progress)
+  - Irmin (complete?)
+  - Jitsu (complete)
+  - Signpost (complete) Not sure where this goes...
+  - Unanimous (in progress) Not sure where this goes...
+- Web Framework
+  - AWS (complete)
+  - jopam (in progress)
+  - lopam (in progress)
+- Databox
+- Pioneer Projects
+- Security
+  - TLS (3.0 in progress)
+  - SibylFS (complete?)
+- Bulk builds
+  - CISO (complete?)
+* Blogs (autogen, using River)
+* Papers (autogen?)
+* News (yearly updates) - how will we structure updates? Can we combine ocaml.io and ocaml.org
+* Outreach/Events (autogen? With upcoming events too)
+ - Outreachy
+ - Compiler Hacking
+ - AFP course
+ - None academic workshops/talks
+ - Metaprogramming Summer School
+ - OpenBSD Hackathon
+ - MirageOS Hackathon
+* People (manual)
+ - mugshots
+ - visitors
+* Images (manual) How can we share photos between people?
+* Front page (static/manual)
+* Partners (static/manual)
+ - Docker
+ - Jane Street
+ - INRIA
+ - OCamlPro
+ - Facebook
+ - Citrix
+ - Horizon
+ - Microsoft Research
+ - Google
+* OCaml users (static/manual)
+ - http://ocaml.org/learn/companies.html
+* Collaboration (static/manual)
+ - Visiting the lab
+ - Internships
+ - PhD study
+ - Full-time positions/post-doc positions
+* Contact us (static/manual)
+
+ - Activity - comes up with a page here: http://www.cl.cam.ac.uk/projects/ocamllabs/activity/ which is different to the other pages...

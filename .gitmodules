@@ -1,6 +1,0 @@
-[submodule "updates"]
-	path = updates
-	url = git@github.com:ocamllabs/ocl-updates
-[submodule "bin"]
-	path = bin
-	url = git@github.com:ocamllabs/ocl-reporter

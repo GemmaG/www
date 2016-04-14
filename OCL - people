@@ -9,16 +9,27 @@ title: Cambridge University Computer Laboratory Members
 ---
 
 Core Team
-- KC Sivaramakrishnan
-- Richard Mortier
-- Daniel Buenzli
+- [KC Sivaramakrishnan](http://kcsrk.info/)
+KC is a post-doctoral Research Associate at the University of Cambridge Computer Lab and Research Fellow at Darwin College, Cambridge. He is interested in the design and implementation of concurrent functional programming languages targeting scalable platforms such as many-core processors and compute clouds. His research spans programming models, compilers, static analysis, schedulers, threading systems, and memory management.
 
-- Jon Crowcroft
-- Ian Leslie
-- Alan Mycroft
+[GitHub](https://github.com/kayceesrk)
+
+- [Richard Mortier](http://mort.io/)
+Mort is a University Lecturer in NetOS, part of the Systems Research Group in the Cambridge University Computer Laboratory. Before Cambrige, he was a lecturer with the Horizon Digital Economy Research Institute at the University of Nottingham School of Computer Science. He has worked on topics from distributed system performance monitoring and debugging, to Internet routing protocols, to real-time media platform design and implementation.
+
+[GitHub](https://github.com/mor1)
+
+- [Daniel Buenzli](http://erratique.ch/profile)
+Daniel has a background in freelance and consultancy work, and collaborates with the group through building well used and loved OCaml modules. His interests span system, database and graphics programming, human-computer interaction, embedded systems and interactive installations.
+
+[GitHub](https://github.com/dbuenzli)
+
+- [Jon Crowcroft](http://www.cl.cam.ac.uk/~jac22/)
+- [Ian Leslie](http://www.cl.cam.ac.uk/~iml1/)
+- [Alan Mycroft](http://www.cl.cam.ac.uk/~am21/)
 
 - Hannes Mehnert
-- David Kaloper Merskinjak
+- David Kaloper 
 - Heidi Howard
 - Stephen Dolan
 - Gregory Tsipenyuk
@@ -93,6 +104,7 @@ Microsoft Research
 ---
  Others - do we want to keep them, they were on the original OCL people page
 
+Previous visitors
  - Raphael Proust
  - Haris Rotsos
  - Tim Griffin

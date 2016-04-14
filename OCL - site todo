@@ -36,13 +36,20 @@ Future content:
 - Mirage
   - Canopy (in progress)
   - River (in progress?)
+  - Irmin (complete)
+  - Jitsu toolstack (complete)
+  - Home router (in progress)
+  - lvm (in progress?)
+  - Moana (in progress?)
+  - TLS (in progress)
+  - Polyversal TCP prototype (in progress?)
+  - Xen/ARM 7 port (complete)
+  - TCP/IP stack (complete?)
+  - Signpost (complete)
 - Tooling
   - Codoc (in progress) or is Leo working on odoc?
   - AFL (in progress)
   - Merlin (merlin-extend in progress)
-  - Irmin (complete?)
-  - Jitsu (complete)
-  - Signpost (complete) Not sure where this goes...
   - Unanimous (in progress) Not sure where this goes...
 - Web Framework
   - AWS (complete)
@@ -51,7 +58,6 @@ Future content:
 - Databox
 - Pioneer Projects
 - Security
-  - TLS (3.0 in progress)
   - SibylFS (complete?)
 - Bulk builds
   - CISO (complete?)
